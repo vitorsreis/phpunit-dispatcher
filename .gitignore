@@ -1,0 +1,4 @@
+/.idea
+/dist/phpunit-dispatcher/
+/vendor
+/composer.lock

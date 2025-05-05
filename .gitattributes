@@ -1,0 +1,14 @@
+/.github export-ignore
+/src export-ignore
+/tests export-ignore
+/vendor export-ignore
+.gitattributes export-ignore
+.gitignore export-ignore
+builder.php export-ignore
+composer.lock export-ignore
+LICENSE export-ignore
+mapping.json export-ignore
+README.md export-ignore
+
+/dist/phpunit-dispatcher.phar
+composer.json

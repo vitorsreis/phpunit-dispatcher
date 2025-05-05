@@ -1,0 +1,30 @@
+{
+  "name": "vitorsreis/phpunit-dispatcher",
+  "description": "PHPUnit Dispatcher - A tool that automatically selects and runs the appropriate PHPUnit Phar version based on your PHP version.",
+  "version": "1.0.0",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/vitorsreis/phpunit-dispatcher",
+  "authors": [
+    {
+      "name": "Vitor Reis",
+      "email": "vitor@d5w.com.br"
+    }
+  ],
+  "bin": [
+    "dist/phpunit-dispatcher.phar"
+  ],
+  "require": {
+    "php": ">=5.3",
+    "ext-curl": "*",
+    "ext-json": "*"
+  },
+  "suggest": {
+    "phpunit/phpunit": "*"
+  },
+  "scripts": {
+    "build": [
+      "php -d phar.readonly=0 src/builder.php"
+    ]
+  }
+}
