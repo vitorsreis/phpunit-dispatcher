@@ -48,7 +48,10 @@ class Http
         $info = curl_getinfo($ch);
         $errno = curl_errno($ch);
         $error = curl_error($ch);
-        curl_close($ch);
+
+        if (version_compare(PHP_VERSION, '8.5', "<")) {
+            curl_close($ch);
+        }
 
         return array(
             'code' => $info['http_code'],
