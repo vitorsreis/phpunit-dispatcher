@@ -244,7 +244,7 @@ try {
     Logger::success("Running PHPUnit $phpunitVersion...\n");
 
     $command = escapeshellcmd(PHP_BINARY);
-    $command .= " " . escapeshellcmd($phpunitPharFile);
+    $command .= " " . escapeshellarg($phpunitPharFile);
     $command .= " " . implode(' ', array_map('escapeshellarg', array_filter(
             array_slice($argv, 1),
             static function ($arg) {
