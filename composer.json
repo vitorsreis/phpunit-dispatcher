@@ -1,7 +1,7 @@
 {
   "name": "vitorsreis/phpunit-dispatcher",
   "description": "PHPUnit Dispatcher - A tool that automatically selects and runs the appropriate PHPUnit Phar version based on your PHP version.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "library",
   "license": "MIT",
   "homepage": "https://github.com/vitorsreis/phpunit-dispatcher",
