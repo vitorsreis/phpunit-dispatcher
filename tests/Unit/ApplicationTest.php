@@ -6,7 +6,7 @@ class ApplicationTest extends PUDTestCase
 {
     public function testVersionOptionIsAvailableWithoutNetwork()
     {
-        $this->expectOutputString("2.0.0\n");
+        $this->expectOutputString("2.0.1\n");
         $this->assertSame(0, Application::run(array('phpunit-dispatcher', '--pud-version')));
     }
 

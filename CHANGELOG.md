@@ -5,6 +5,16 @@ All notable changes to PHPUnit Dispatcher are documented here.
 This project follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.1 - 2026-11-09
+
+### Changed
+
+- Removed the unnecessary `--pud-offline` option; cached releases are reused automatically and missing releases are downloaded.
+- Reserved `--pud-force-update` for refreshing the PHPUnit release index and selecting a newer compatible release.
+- Reworked the README around the user workflow and benefits of a single PHPUnit command across PHP versions.
+- Split tests into `Unit` and `Integration` suites and expanded PHPUnit and PHPStan configuration.
+- Runs the minimal integration smoke test through the dispatcher across PHP 5.3 through PHP 8.5 in CI.
+
 ## 2.0.0 - Unreleased
 
 Version 2 is a new implementation focused on one small application core shared by Composer and PHAR entrypoints. It

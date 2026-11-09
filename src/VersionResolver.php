@@ -4,7 +4,7 @@ namespace PUD;
 
 class VersionResolver
 {
-    const DISPATCHER_VERSION = '2.0.0';
+    const DISPATCHER_VERSION = '2.0.1';
 
     public static function phpunitMajorVersion($phpVersion)
     {

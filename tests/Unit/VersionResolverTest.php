@@ -31,7 +31,7 @@ class VersionResolverTest extends PUDTestCase
 
     public function testDispatcherVersionIsV2()
     {
-        $this->assertSame('2.0.0', VersionResolver::DISPATCHER_VERSION);
+        $this->assertSame('2.0.1', VersionResolver::DISPATCHER_VERSION);
     }
 
     public function testUnsupportedPhpAndInvalidRepositoryAreRejected()
