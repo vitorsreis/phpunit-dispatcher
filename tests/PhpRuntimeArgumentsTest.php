@@ -7,7 +7,7 @@ class PhpRuntimeArgumentsTest extends PUDTestCase
     public function testExtractsIniDefinitionsBeforeTheScript()
     {
         $arguments = new PhpRuntimeArguments(array(
-            PHP_BINARY,
+            (defined('PHP_BINARY') ? PHP_BINARY : 'php'),
             '-d',
             'memory_limit=512M',
             '-dxdebug.mode=off',
@@ -22,7 +22,7 @@ class PhpRuntimeArgumentsTest extends PUDTestCase
     public function testStopsAtTheFirstScriptToken()
     {
         $arguments = new PhpRuntimeArguments(array(
-            PHP_BINARY,
+            (defined('PHP_BINARY') ? PHP_BINARY : 'php'),
             'bin/phpunit-dispatcher',
             '-dxdebug.mode=coverage'
         ));

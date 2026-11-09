@@ -20,8 +20,9 @@ foreach (array('src', 'bin') as $directory) {
 }
 
 $failed = false;
+$phpBinary = defined('PHP_BINARY') ? PHP_BINARY : 'php';
 foreach ($files as $file) {
-    passthru(escapeshellarg(PHP_BINARY) . ' -l ' . escapeshellarg($file), $code);
+    passthru(escapeshellarg($phpBinary) . ' -l ' . escapeshellarg($file), $code);
     if ($code !== 0) {
         $failed = true;
     }

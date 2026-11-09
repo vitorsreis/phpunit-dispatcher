@@ -52,6 +52,35 @@ class VersionResolver
         return is_string($version) && !!preg_match('/^\d+\.\d+\.\d+$/', $version);
     }
 
+    public static function fallbackMapping()
+    {
+        return array(
+            '4' => '4.8.36',
+            '5' => '5.7.27',
+            '6' => '6.5.14',
+            '7' => '7.5.20',
+            '8' => '8.5.56',
+            '9' => '9.6.38',
+            '10' => '10.5.66',
+            '11' => '11.5.57',
+            '12' => '12.5.43',
+            '13' => '13.4.6'
+        );
+    }
+
+    public static function withFallbackMapping($mapping)
+    {
+        $mapping = is_array($mapping) ? $mapping : array();
+        foreach (self::fallbackMapping() as $major => $version) {
+            if (!isset($mapping[$major]) || version_compare($mapping[$major], $version, '<')) {
+                $mapping[$major] = $version;
+            }
+        }
+
+        ksort($mapping);
+        return $mapping;
+    }
+
     public static function latestByMajor($html)
     {
         $mapping = array();

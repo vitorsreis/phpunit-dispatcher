@@ -120,6 +120,10 @@ class Application
             } else {
                 throw new Exception("Unable to update PHPUnit repository: HTTP $response[code]");
             }
+
+            $repository['mapping'] = VersionResolver::withFallbackMapping(
+                isset($repository['mapping']) ? $repository['mapping'] : array()
+            );
         }
 
         if (!isset($repository['mapping'][$major])) {
@@ -175,7 +179,8 @@ class Application
         }
 
         $phpArguments = Application::mergePhpArguments($inheritedPhpArguments, $explicitPhpArguments);
-        $parts = array(escapeshellarg(PHP_BINARY));
+        $phpBinary = defined('PHP_BINARY') ? PHP_BINARY : 'php';
+        $parts = array(escapeshellarg($phpBinary));
         foreach ($phpArguments as $argument) {
             $parts[] = escapeshellarg($argument);
         }
