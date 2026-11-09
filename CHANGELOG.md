@@ -35,7 +35,7 @@ keeps the dispatcher contract while removing the old build-time dispatcher layer
 
 ### Changed
 
-- PHPUnit releases are selected from the newest available patch release for the compatible major line.
+- PHPUnit releases are selected from the newest available patch release for the compatible major line using the upstream all-releases index.
 - Downloaded PHARs are validated before being used and invalid cached files are discarded.
 - HTTP downloads use verified TLS, bounded timeouts, a user agent, and cached response headers.
 - PHAR release artifacts are built only during release automation and are excluded from source archives.

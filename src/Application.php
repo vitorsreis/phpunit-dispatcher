@@ -93,7 +93,7 @@ class Application
             if (in_array('--pud-offline', $arguments, true)) {
                 throw new Exception('No cached PHPUnit repository is available for offline mode.');
             }
-            $response = Http::get('https://phar.phpunit.de', array(
+            $response = Http::get('https://phar.phpunit.de/all-releases.html', array(
                 CURLOPT_HTTPHEADER => array(
                     'If-None-Match: ' . (isset($repository['etag']) ? $repository['etag'] : ''),
                     'If-Modified-Since: ' . (isset($repository['last-modified']) ? $repository['last-modified'] : '')
