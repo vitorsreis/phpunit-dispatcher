@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of phpunit-dispatcher
- * @author Vitor Reis <vitor@d5w.com.br>
- */
-
 namespace PUD;
 
 /**
@@ -12,7 +7,8 @@ namespace PUD;
  *     code: int,
  *     content: string|false,
  *     error: string|null,
- *     info: array<string, mixed>
+ *     info: array<string, mixed>,
+ *     headers: array<string, string>
  * }
  */
 class Http
@@ -27,14 +23,28 @@ class Http
     public static function raw($method, $url, $data = null, $options = array())
     {
         $ch = curl_init();
+        $headers = array();
+
+        if ($ch === false) {
+            return array('code' => 0, 'content' => false, 'error' => 'Unable to initialize cURL', 'info' => array(), 'headers' => array());
+        }
 
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        curl_setopt($ch, CURLOPT_USERAGENT, 'phpunit-dispatcher/' . VersionResolver::DISPATCHER_VERSION);
+        curl_setopt($ch, CURLOPT_HEADERFUNCTION, function ($handle, $header) use (&$headers) {
+            if (strpos($header, ':') !== false) {
+                list($name, $value) = explode(':', $header, 2);
+                $headers[strtolower(trim($name))] = trim($value);
+            }
+            return strlen($header);
+        });
 
         if ($data) {
             curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -49,15 +59,16 @@ class Http
         $errno = curl_errno($ch);
         $error = curl_error($ch);
 
-        if (version_compare(PHP_VERSION, '8.5', "<")) {
+        if (PHP_VERSION_ID < 80500) {
             curl_close($ch);
         }
 
         return array(
             'code' => $info['http_code'],
             'content' => $content,
-            'error' => ($errno || $error) ? "#$errno $error" : 0,
-            'info' => $info
+            'error' => ($errno || $error) ? "#$errno $error" : '',
+            'info' => $info,
+            'headers' => $headers
         );
     }
 

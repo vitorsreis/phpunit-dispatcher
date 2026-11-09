@@ -1,4 +1,13 @@
+/.coverage
+/.cache
+/.cursor
 /.idea
-/dist/phpunit-dispatcher/
+/.phpstan.cache
+/.phpunit.cache
+/.phpunit.result.cache
+/.rector.cache
+/build
+/coverage
+/dist
 /vendor
 /composer.lock

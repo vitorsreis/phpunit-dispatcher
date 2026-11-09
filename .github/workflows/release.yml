@@ -3,25 +3,61 @@ name: Release
 on:
   push:
     tags:
-      - '*'
+      - "v*"
 
 permissions:
+  attestations: write
   contents: write
+  id-token: write
 
 jobs:
-  build:
+  release:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
 
-      - name: Create Release
-        uses: ncipollo/release-action@v1
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
         with:
-          tag: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
-          draft: false
-          prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifacts: dist/phpunit-dispatcher.phar
-          allowUpdates: true
+          php-version: "8.5"
+          extensions: curl, json, mbstring, xml
+          coverage: none
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Build PHAR
+        run: composer build:phar
+
+      - name: Smoke test PHAR
+        run: php build/phar/phpunit-dispatcher.phar --pud-version
+
+      - name: Verify checksum
+        working-directory: build/phar
+        run: sha256sum -c phpunit-dispatcher.phar.sha256
+
+      - name: Generate provenance attestation
+        uses: actions/attest@v4
+        with:
+          subject-path: build/phar/phpunit-dispatcher.phar
+
+      - name: Build release notes
+        shell: bash
+        run: |
+          cat <<EOF > release-notes.md
+          See [CHANGELOG.md](${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/CHANGELOG.md) for the full list of changes.
+          EOF
+
+      - name: Publish release assets
+        uses: softprops/action-gh-release@v3
+        with:
+          body_path: release-notes.md
+          generate_release_notes: true
+          files: |
+            build/phar/phpunit-dispatcher.phar
+            build/phar/phpunit-dispatcher.phar.sha256

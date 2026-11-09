@@ -1,10 +1,5 @@
 <?php
 
-/**
- * This file is part of phpunit-dispatcher
- * @author Vitor Reis <vitor@d5w.com.br>
- */
-
 namespace PUD;
 
 use InvalidArgumentException;
@@ -20,35 +15,39 @@ class Logger
     );
 
     /**
-     * @param string<'trace'|'success'|'error'> $level
+     * @param string $level
      * @return void
      */
     public static function setLevel($level)
     {
-        if (!in_array($level, static::$levels)) {
+        if (!in_array($level, self::$levels)) {
             throw new InvalidArgumentException("Invalid log level: $level");
         }
 
-        static::$level = $level;
+        self::$level = $level;
     }
 
     /**
-     * @param string<'trace'|'success'|'error'> $level
+     * @param string $level
      * @param string $value
      * @param bool $prefix
      * @return void
      */
     private static function log($level, $value, $prefix = true)
     {
-        if (!in_array($level, static::$levels)) {
+        if (!in_array($level, self::$levels)) {
             throw new InvalidArgumentException("Invalid log level: $level");
         }
 
-        if (array_search($level, static::$levels) < array_search(static::$level, static::$levels)) {
+        if (array_search($level, self::$levels) < array_search(self::$level, self::$levels)) {
             return;
         }
 
-        $default = "\033[0m"; // Default
+        $default = "\033[0m";
+        $colored = getenv('NO_COLOR') === false
+            && function_exists('posix_isatty')
+            && defined('STDOUT')
+            && @posix_isatty(STDOUT);
 
         switch ($level) {
             case 'error':
@@ -62,11 +61,17 @@ class Logger
                 break;
         }
 
+        if (!$colored) {
+            $color = '';
+            $default = '';
+        }
+
         if ($prefix) {
             $prefix = "[PUD " . date('Y-m-d H:i:s') . "] ";
         }
 
-        echo $default, $prefix, $color, $value, $default;
+        $stream = $level === 'error' && defined('STDERR') ? STDERR : STDOUT;
+        fwrite($stream, $default . $prefix . $color . $value . $default);
     }
 
     /**
@@ -76,7 +81,7 @@ class Logger
      */
     public static function trace($value, $prefix = true)
     {
-        static::log('trace', $value, $prefix);
+        self::log('trace', $value, $prefix);
     }
 
     /**
@@ -86,7 +91,7 @@ class Logger
      */
     public static function success($value, $prefix = true)
     {
-        static::log('success', $value, $prefix);
+        self::log('success', $value, $prefix);
     }
 
     /**
@@ -96,6 +101,6 @@ class Logger
      */
     public static function error($value, $prefix = true)
     {
-        static::log('error', $value, $prefix);
+        self::log('error', $value, $prefix);
     }
 }

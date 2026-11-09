@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: PHP ${{ matrix.php }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+        php:
+          - "5.3"
+          - "5.4"
+          - "5.5"
+          - "5.6"
+          - "7.0"
+          - "7.1"
+          - "7.2"
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
+          - "8.2"
+          - "8.3"
+          - "8.4"
+          - "8.5"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, json, mbstring, xml
+          coverage: none
+          tools: composer
+
+      - name: Validate composer.json
+        run: composer validate --strict
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Lint source
+        run: composer lint
+
+      - name: Smoke test entrypoint
+        run: php bin/phpunit-dispatcher --pud-version
+
+      - name: Run SimpleTest through the dispatcher
+        run: php bin/phpunit-dispatcher tests/SimpleTest.php
+
+      - name: Install PHPStan on modern runtimes
+        if: contains(fromJSON('["8.1", "8.2", "8.3", "8.4", "8.5"]'), matrix.php)
+        run: composer require --dev phpstan/phpstan:^2.0 --no-interaction --no-progress
+
+      - name: Run quality suite on modern runtimes
+        if: contains(fromJSON('["8.1", "8.2", "8.3", "8.4", "8.5"]'), matrix.php)
+        run: composer quality
+
+      - name: Run PHPStan on modern runtimes
+        if: contains(fromJSON('["8.1", "8.2", "8.3", "8.4", "8.5"]'), matrix.php)
+        run: composer analyse
+
+      - name: Run tests on supported runtimes
+        if: contains(fromJSON('["5.3", "5.4", "5.5", "5.6", "7.0", "7.1", "7.2", "7.3", "7.4", "8.0"]'), matrix.php)
+        run: composer test
+
+      - name: Build PHAR
+        run: composer build:phar
+
+      - name: Smoke test PHAR
+        run: php build/phar/phpunit-dispatcher.phar --pud-version

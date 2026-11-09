@@ -1,27 +1,15 @@
 <?php
 
-/**
- * This file is part of phpunit-dispatcher
- * @author Vitor Reis <vitor@d5w.com.br>
- */
-
 namespace PUD;
 
 class File
 {
-    /**
-     * @var string
-     */
+    /** @var string */
     private $filename;
 
-    /**
-     * @var resource|false
-     */
+    /** @var resource|false */
     private $handle = false;
 
-    /**
-     * @var string
-     */
     public function __construct($filename)
     {
         $this->filename = $filename;
@@ -37,25 +25,19 @@ class File
         $this->close();
     }
 
-    /**
-     * @return resource|false
-     */
+    /** @return resource|false */
     public function handle()
     {
         return $this->handle;
     }
 
-    /**
-     * @return resource|false
-     */
+    /** @return resource|false */
     public function open($mode = "a+")
     {
         return $this->handle = fopen($this->filename, $mode);
     }
 
-    /**
-     * @return bool
-     */
+    /** @return bool */
     public function close()
     {
         if (!$this->handle) {
@@ -108,9 +90,7 @@ class File
         return fwrite($this->handle, $data);
     }
 
-    /**
-     * @return int|false
-     */
+    /** @return int|false */
     public function size()
     {
         if (!$this->handle) {
@@ -133,9 +113,7 @@ class File
         return @flock($this->handle, $exclusive ? LOCK_EX : LOCK_SH);
     }
 
-    /**
-     * @return bool
-     */
+    /** @return bool */
     public function unlock()
     {
         if (!$this->handle) {

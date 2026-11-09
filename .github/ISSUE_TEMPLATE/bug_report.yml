@@ -1,0 +1,65 @@
+name: Bug report
+description: Report incorrect PHPUnit Dispatcher behavior.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What happened, and what should have happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include the exact command, arguments, cache options, relevant files, and output.
+      placeholder: |
+        php bin/phpunit-dispatcher --pud-verbose tests
+        output:
+        ...
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Dispatcher version or commit
+      placeholder: 2.0.0 or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: 8.5.x
+    validations:
+      required: true
+  - type: input
+    id: phpunit-version
+    attributes:
+      label: Selected PHPUnit version
+      placeholder: 13.4.6 or unknown
+  - type: dropdown
+    id: installation
+    attributes:
+      label: Installation method
+      options:
+        - Composer binary
+        - Release PHAR
+        - Source checkout
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - WSL
+        - Other
+    validations:
+      required: true

@@ -1,30 +1,59 @@
 {
   "name": "vitorsreis/phpunit-dispatcher",
-  "description": "PHPUnit Dispatcher - A tool that automatically selects and runs the appropriate PHPUnit Phar version based on your PHP version.",
-  "version": "1.0.1",
+  "description": "A secure PHPUnit PHAR dispatcher that selects a compatible PHPUnit release for the running PHP version.",
+  "keywords": [
+    "php",
+    "phpunit",
+    "testing",
+    "cli",
+    "phar"
+  ],
   "type": "library",
   "license": "MIT",
   "homepage": "https://github.com/vitorsreis/phpunit-dispatcher",
+  "support": {
+    "issues": "https://github.com/vitorsreis/phpunit-dispatcher/issues",
+    "source": "https://github.com/vitorsreis/phpunit-dispatcher"
+  },
   "authors": [
     {
       "name": "Vitor Reis",
       "email": "vitor@d5w.com.br"
     }
   ],
-  "bin": [
-    "dist/phpunit-dispatcher.phar"
-  ],
   "require": {
     "php": ">=5.3",
     "ext-curl": "*",
     "ext-json": "*"
   },
-  "suggest": {
-    "phpunit/phpunit": "*"
+  "require-dev": {
+    "phpunit/phpunit": "^4.8 || ^5.7 || ^6.5 || ^7.5 || ^8.5 || ^9.6 || ^10.5 || ^11.5 || ^12.0 || ^13.0"
   },
+  "autoload": {
+    "psr-4": {
+      "PUD\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "bin": [
+    "bin/phpunit-dispatcher"
+  ],
+  "minimum-stability": "stable",
+  "prefer-stable": true,
   "scripts": {
-    "build": [
-      "php -d phar.readonly=0 src/builder.php"
-    ]
+    "analyse": "phpstan analyse --configuration=phpstan.neon",
+    "lint": "@php bin/lint",
+    "test": "phpunit --colors=always tests",
+    "test:coverage": "@php -dxdebug.mode=coverage vendor/bin/phpunit --coverage-text tests",
+    "quality": [
+      "@composer validate --strict",
+      "@lint",
+      "@test"
+    ],
+    "build:phar": "@php -d phar.readonly=0 bin/phar"
   }
 }

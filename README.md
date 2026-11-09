@@ -1,100 +1,131 @@
 # PHPUnit Dispatcher
 
-[![Latest Version](https://img.shields.io/github/release/vitorsreis/phpunit-dispatcher.svg?style=flat-square)](https://github.com/vitorsreis/phpunit-dispatcher/releases)
-[![Total Downloads](https://img.shields.io/packagist/dt/vitorsreis/phpunit-dispatcher.svg?style=flat-square)](https://packagist.org/packages/vitorsreis/phpunit-dispatcher)
-[![License](https://img.shields.io/github/license/vitorsreis/phpunit-dispatcher.svg?style=flat-square)](LICENSE)
-[![PHP Version](https://img.shields.io/packagist/php-v/vitorsreis/phpunit-dispatcher.svg?style=flat-square)](composer.json)
+[![CI](https://github.com/vitorsreis/phpunit-dispatcher/actions/workflows/ci.yml/badge.svg)](https://github.com/vitorsreis/phpunit-dispatcher/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/vitorsreis/phpunit-dispatcher)](https://github.com/vitorsreis/phpunit-dispatcher/releases)
+[![PHP versions](https://img.shields.io/packagist/php-v/vitorsreis/phpunit-dispatcher)](https://packagist.org/packages/vitorsreis/phpunit-dispatcher)
+[![Downloads](https://img.shields.io/packagist/dt/vitorsreis/phpunit-dispatcher)](https://packagist.org/packages/vitorsreis/phpunit-dispatcher)
+[![License](https://img.shields.io/github/license/vitorsreis/phpunit-dispatcher)](LICENSE)
 
-A tool that automatically selects and runs the appropriate [PHPUnit](https://github.com/sebastianbergmann/phpunit) PHAR version based on your PHP version.
+PHPUnit Dispatcher (PUD) selects the newest PHPUnit PHAR compatible with the PHP runtime that launches it. It keeps
+downloaded releases in a local cache and forwards normal PHPUnit arguments unchanged.
 
-## Description
+It supports PHP 5.3 through PHP 8.5, so one project command can run the appropriate PHPUnit release on legacy and
+current environments.
 
-PHPUnit Dispatcher is a smart wrapper for PHPUnit that automatically selects the correct PHAR version based on your current PHP version. This eliminates the need to manually manage different PHPUnit versions for different PHP environments.
+## Quick start
 
-## Features
-
-- Automatically detects your PHP version
-- Selects the appropriate PHPUnit version
-- Runs PHPUnit with all your specified arguments
-- Easy to use - just run it like you would run PHPUnit
-- Lightweight - no additional dependencies required
-- Support simultaneous processes with same or different PHPUnit versions
-- Caching mechanism for faster subsequent runs
-
-## Installation
-
-### Using Composer
+Install it in a project:
 
 ```bash
 composer require --dev vitorsreis/phpunit-dispatcher
+vendor/bin/phpunit-dispatcher tests
 ```
 
-After installation, the phpunit-dispatcher.phar file will be available in `vendor/bin/phpunit-dispatcher.phar`.
+Or download a release PHAR:
 
-### Manual Installation
+```bash
+php phpunit-dispatcher.phar tests
+```
 
-Download the latest release from the [releases page](https://github.com/vitorsreis/phpunit-dispatcher/releases)
+The first run downloads the compatible PHPUnit PHAR. Later runs reuse the cache.
+
+## Compatibility
+
+| PHP runtime | PHPUnit line |
+|-------------|--------------|
+| 5.3–5.5     | 4            |
+| 5.6         | 5            |
+| 7.0         | 6            |
+| 7.1         | 7            |
+| 7.2         | 8            |
+| 7.3–8.0     | 9            |
+| 8.1         | 10           |
+| 8.2         | 11           |
+| 8.3         | 12           |
+| 8.4–8.5     | 13           |
+
+The dispatcher supports the full PHP range above. PHPUnit itself may impose additional requirements for a selected
+release, such as extensions required by the test suite.
 
 ## Usage
 
-Use it exactly like you would use PHPUnit:
+PUD accepts regular PHPUnit options and forwards them to the selected PHAR:
 
 ```bash
-php phpunit-dispatcher.phar [options] <directory|file> ...
+php phpunit-dispatcher.phar tests
+php phpunit-dispatcher.phar --filter UserTest tests
+php phpunit-dispatcher.phar --coverage-text tests
 ```
 
-For example:
+Dispatcher options use the `--pud-` prefix and are removed before PHPUnit starts:
 
 ```bash
-php phpunit-dispatcher.phar --version
-
-php phpunit-dispatcher.phar tests/
+php phpunit-dispatcher.phar --pud-version
+php phpunit-dispatcher.phar --pud-help
+php phpunit-dispatcher.phar --pud-phpunit-version=9.6.26 tests
+php phpunit-dispatcher.phar --pud-force-update tests
+php phpunit-dispatcher.phar --pud-offline tests
+php phpunit-dispatcher.phar --pud-clear-cache tests
+php phpunit-dispatcher.phar --pud-verbose tests
 ```
 
-### Cache and Update
-
-The first time you run the PHPUnit Dispatcher, it will download the appropriate PHPUnit PHAR version for your PHP version and store in cache. This allows for faster subsequent runs. You can force the PHPUnit version update using the `--pud-force-update` argument:
+PHP runtime options work both before the dispatcher and after it. They are placed before the child PHAR so they
+configure the PHP process that runs PHPUnit:
 
 ```bash
-php phpunit-dispatcher.phar --pud-force-update
+php -d memory_limit=1G phpunit-dispatcher.phar tests
+php phpunit-dispatcher.phar -d xdebug.mode=coverage tests
+php phpunit-dispatcher.phar -dmemory_limit=1G tests
 ```
 
-### Specifying PHPUnit Version Manually
+## Cache and offline mode
 
-You can also manually specify the PHPUnit version to be used with the `--pud-phpunit-version` argument:
+The default cache is `~/.cache/phpunit-dispatcher` on Unix-like systems and `%LOCALAPPDATA%/phpunit-dispatcher` on
+Windows. Set `PUD_CACHE_DIR` or use `--pud-cache-dir=PATH` to choose another location.
+
+Use offline mode when the repository metadata and requested PHAR are already cached:
 
 ```bash
-php phpunit-dispatcher.phar --pud-phpunit-version=9.5.0
+php phpunit-dispatcher.phar --pud-offline tests
 ```
 
-Or configure the PHP version mapping by editing the `phpunit-dispatcher/mapping.json`
+`--pud-clear-cache` removes cached metadata and releases before the next run. `--pud-force-update` refreshes the release
+repository. An explicit version must have the `X.Y.Z` form.
 
-## Building from Source
-
-To build the project from source:
-
-1. Clone the repository
-2. Build the Phar file:
-```bash
-composer run-script build
-```
-
-### Verbose Mode
-
-To enable verbose mode with additional logs during execution, use the `--pud-verbose` argument:
+## Development
 
 ```bash
-php phpunit-dispatcher.phar --pud-verbose
+composer install
+composer validate --strict
+composer quality
+composer build:phar
+php build/phar/phpunit-dispatcher.phar --pud-version
 ```
+
+The same application core powers the Composer binary and the PHAR. `tests/SimpleTest.php` is intentionally minimal and
+is executed through PUD on every PHP version in CI. The full PHPUnit suite runs with the version resolved for each
+supported runtime.
+
+PHPStan is an optional modern-runtime check:
+
+```bash
+composer require --dev phpstan/phpstan:^2.0
+composer analyse
+```
+
+Release builds are generated in `build/phar/` and include `phpunit-dispatcher.phar.sha256`. Do not commit generated
+builds, `vendor/`, caches, or `composer.lock`.
+
+## Security
+
+Downloads use TLS certificate and host verification. Verify the SHA-256 checksum published beside a release PHAR before
+executing it. Report vulnerabilities privately using [SECURITY.md](SECURITY.md).
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening a pull request. The project also includes
+a [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Author
-
-- Vitor Reis (vitor@d5w.com.br)
+Released under the [MIT license](LICENSE).
