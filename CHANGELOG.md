@@ -26,7 +26,7 @@ keeps the dispatcher contract while removing the old build-time dispatcher layer
 - Shared application core used by Composer and PHAR execution.
 - Explicit `--pud-version` and `--pud-help` commands.
 - Platform-aware cache directories using `XDG_CACHE_HOME` on Unix and `LOCALAPPDATA`/`APPDATA` on Windows.
-- Atomic cache writes, cache locks, offline mode, cache clearing, repository metadata, and explicit PHPUnit release
+- Atomic cache writes, cache locks, automatic cache reuse, cache clearing, repository metadata, and explicit PHPUnit release
   selection.
 - Safe forwarding of compact and separated PHP `-d` options before the PHPUnit PHAR.
 - PHPUnit compatibility tests and a simple dispatcher smoke test run through PUD in CI.

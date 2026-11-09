@@ -60,7 +60,7 @@ jobs:
         run: php bin/phpunit-dispatcher --pud-version
 
       - name: Run SimpleTest through the dispatcher
-        run: php bin/phpunit-dispatcher tests/SimpleTest.php
+        run: php bin/phpunit-dispatcher tests/Integration/SimpleTest.php
 
       - name: Install PHPStan on modern runtimes
         if: contains(fromJSON('["8.1", "8.2", "8.3", "8.4", "8.5"]'), matrix.php)

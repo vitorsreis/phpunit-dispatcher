@@ -27,7 +27,7 @@ composer lint
 composer test
 composer quality
 composer build:phar
-php bin/phpunit-dispatcher tests/SimpleTest.php
+php bin/phpunit-dispatcher tests/Integration/SimpleTest.php
 ```
 
 PHPStan is an optional development dependency because it does not support the complete PHP 5.3–8.5 matrix. On PHP 8.1 or
@@ -38,15 +38,17 @@ composer require --dev phpstan/phpstan:^2.0
 composer analyse
 ```
 
-`tests/SimpleTest.php` is intentionally small and is run through the dispatcher in CI on every supported PHP version.
+`tests/Integration/SimpleTest.php` is intentionally small and is run through the dispatcher in CI on every supported PHP version.
 
 ## Tests
+
+The test suite is split into `tests/Unit` for isolated behavior and `tests/Integration` for end-to-end execution through the dispatcher.
 
 - Keep tests compatible with PHPUnit 4 through PHPUnit 13.
 - Test public behavior rather than private implementation details.
 - Cover version selection, cache and lock behavior, HTTP failures, argument forwarding, PHAR packaging, and CLI options
   when they change.
-- Keep network-dependent tests deterministic; use explicit cache directories and offline mode where possible.
+- Keep network-dependent tests deterministic; use explicit cache directories and reusable fixtures where possible.
 - Update the compatibility matrix when a supported PHP or PHPUnit release changes.
 
 ## Documentation
@@ -75,7 +77,7 @@ Include:
 Use Conventional Commits:
 
 ```text
-feat(cache): add offline cache validation
+feat(cache): add cache validation
 fix(cli): preserve PHP ini arguments
 chore(ci): test the dispatcher across supported PHP versions
 ```

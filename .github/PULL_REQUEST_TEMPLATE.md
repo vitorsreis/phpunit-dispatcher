@@ -19,7 +19,7 @@
 - [ ] `composer quality`
 - [ ] `composer analyse` on a supported modern PHP version
 - [ ] `composer build:phar` when packaging or release logic changed
-- [ ] `php bin/phpunit-dispatcher tests/SimpleTest.php`
+- [ ] `php bin/phpunit-dispatcher tests/Integration/SimpleTest.php`
 
 ## Notes
 

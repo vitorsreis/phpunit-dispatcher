@@ -1,0 +1,854 @@
+parameters:
+	ignoreErrors:
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 5
+			path: src/Application.php
+
+		-
+			message: '#^Binary operation "\." between ''\-d'' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Binary operation "\." between ''If\-Modified\-Since\: '' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Binary operation "\." between ''If\-None\-Match\: '' and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Binary operation "\." between mixed and "\\n"\|"\\r\\n" results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Binary operation "\." between mixed and ''/''\|''\\\\'' results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 3
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset ''etag'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset ''last\-modified'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset ''mapping'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 5
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset int\<0, max\> on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset int\<1, max\> on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset mixed on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Cannot access offset non\-falsy\-string&numeric\-string on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:buildCommand\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:buildCommand\(\) has parameter \$arguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:buildCommand\(\) has parameter \$pharFile with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:buildCommand\(\) has parameter \$runtimeArguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:execute\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:execute\(\) has parameter \$arguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:execute\(\) has parameter \$pharFile with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:fail\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:fail\(\) has parameter \$message with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:help\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:isCachedPhar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:isCachedPhar\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:isValidPhar\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:isValidPhar\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:mergePhpArguments\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:mergePhpArguments\(\) has parameter \$runtimeArguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:mergePhpArguments\(\) has parameter \$toolArguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:option\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:option\(\) has parameter \$arguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:option\(\) has parameter \$name with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:phpArgumentKey\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:phpArgumentKey\(\) has parameter \$argument with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:resolveVersion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:resolveVersion\(\) has parameter \$arguments with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:resolveVersion\(\) has parameter \$cacheDirectory with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:run\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Method PUD\\Application\:\:run\(\) has parameter \$argv with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Negated boolean expression is always false\.$#'
+			identifier: booleanNot.alwaysFalse
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$arg of function escapeshellarg expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 3
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$array of function array_slice expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$command of function passthru expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$filename of class Phar constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function filesize expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function fopen expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function is_file expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strpos expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$string of function strlen expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$string of function substr expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#1 \$value of function count expects array\|Countable, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Part \$cacheDirectory \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Part \$name \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: src/Application.php
+
+		-
+			message: '#^Part \$phpunitVersion \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 5
+			path: src/Application.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
+			path: src/Application.php
+
+		-
+			message: '#^Cannot call method getPathname\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 2
+			path: src/Cache.php
+
+		-
+			message: '#^Cannot call method isDir\(\) on mixed\.$#'
+			identifier: method.nonObject
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:clear\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:clear\(\) has parameter \$directory with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:directory\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:directory\(\) has parameter \$override with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:ensure\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:ensure\(\) has parameter \$directory with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:read\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:read\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:readJson\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:readJson\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:remove\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:remove\(\) has parameter \$directory with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:withLock\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:withLock\(\) has parameter \$callback with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:withLock\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:writeAtomic\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:writeAtomic\(\) has parameter \$contents with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Method PUD\\Cache\:\:writeAtomic\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$callback of function call_user_func expects callable\(\)\: mixed, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$directory of class RecursiveDirectoryIterator constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$directory of function mkdir expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$directory of function rmdir expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function file_get_contents expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function fopen expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function is_dir expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 4
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function is_file expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function is_writable expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$filename of function unlink expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$json of function json_decode expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$path of function dirname expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$string of function rtrim expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#1 \$string of function rtrim expects string, string\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Parameter \#2 \$to of function rename expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Part \$filename \(mixed\) of encapsed string cannot be cast to string\.$#'
+			identifier: encapsedStringPart.nonString
+			count: 1
+			path: src/Cache.php
+
+		-
+			message: '#^Binary operation "\-" between int\|false and mixed results in an error\.$#'
+			identifier: binaryOp.invalid
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Method PUD\\File\:\:__construct\(\) has parameter \$filename with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Method PUD\\File\:\:open\(\) has parameter \$mode with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Method PUD\\File\:\:read\(\) has parameter \$start with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Parameter \#2 \$length of function fread expects int\<1, max\>, float\|int\|null given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Parameter \#2 \$mode of function fopen expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Parameter \#2 \$offset of function fseek expects int, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Property PUD\\File\:\:\$filename \(string\) does not accept mixed\.$#'
+			identifier: assign.propertyType
+			count: 1
+			path: src/File.php
+
+		-
+			message: '#^Method PUD\\Http\:\:raw\(\) should return Response of array\{code\: int, content\: string\|false, error\: string\|null, info\: array\<string, mixed\>, headers\: array\<string, string\>\} but returns array\{code\: 0, content\: false, error\: ''Unable to…'', info\: array\{\}, headers\: array\{\}\}\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Method PUD\\Http\:\:raw\(\) should return Response of array\{code\: int, content\: string\|false, error\: string\|null, info\: array\<string, mixed\>, headers\: array\<string, string\>\} but returns array\{code\: int, content\: bool\|string, error\: string, info\: \(array\{url\: string, content_type\: string\|null, http_code\: int, header_size\: int, request_size\: int, filetime\: int, ssl_verify_result\: int, redirect_count\: int, \.\.\.\}\|false\), headers\: array\<string, string\>\}\.$#'
+			identifier: return.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strpos expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#1 \$string of function strlen expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#2 \$string of function explode expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#3 \$value of function curl_setopt expects array\|string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#3 \$value of function curl_setopt expects non\-empty\-string, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#3 \$value of function curl_setopt expects non\-empty\-string\|null, string given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Http.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function array_search expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Logger.php
+
+		-
+			message: '#^Parameter \#2 \$haystack of function in_array expects array, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Logger.php
+
+		-
+			message: '#^Property PUD\\Logger\:\:\$level has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Logger.php
+
+		-
+			message: '#^Property PUD\\Logger\:\:\$levels has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/Logger.php
+
+		-
+			message: '#^Binary operation "\.\=" between string and mixed results in an error\.$#'
+			identifier: assignOp.invalid
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Cannot access offset int\<0, max\> on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:__construct\(\) has parameter \$tokens with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:arguments\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:currentProcessTokens\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:extractDefinitions\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:extractDefinitions\(\) has parameter \$tokens with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:tokenizeWindowsCommandLine\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:tokenizeWindowsCommandLine\(\) has parameter \$commandLine with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:windowsCommandLine\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Method PUD\\PhpRuntimeArguments\:\:windowsProcessTokens\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Parameter \#1 \$haystack of function strpos expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Parameter \#1 \$string of function strlen expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Property PUD\\PhpRuntimeArguments\:\:\$tokens has no type specified\.$#'
+			identifier: missingType.property
+			count: 1
+			path: src/PhpRuntimeArguments.php
+
+		-
+			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
+			identifier: foreach.nonIterable
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:fallbackMapping\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:isValidRelease\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:isValidRelease\(\) has parameter \$version with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:latestByMajor\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:latestByMajor\(\) has parameter \$html with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:phpunitMajorVersion\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:phpunitMajorVersion\(\) has parameter \$phpVersion with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:withFallbackMapping\(\) has no return type specified\.$#'
+			identifier: missingType.return
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Method PUD\\VersionResolver\:\:withFallbackMapping\(\) has parameter \$mapping with no type specified\.$#'
+			identifier: missingType.parameter
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Parameter \#1 \$version1 of function version_compare expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Parameter \#2 \$subject of function preg_match expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Parameter \#2 \$version2 of function version_compare expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Parameter \#3 \$length of function substr expects int\|null, int\<0, max\>\|false given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/VersionResolver.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 3
+			path: src/VersionResolver.php

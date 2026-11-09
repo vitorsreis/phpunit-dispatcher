@@ -46,14 +46,11 @@ class Application
             }
 
             $pharFile = $cacheDirectory . DIRECTORY_SEPARATOR . "phpunit-$phpunitVersion.phar";
-            Cache::withLock($pharFile . '.lock', function () use ($pharFile, $phpunitVersion, $arguments) {
+            Cache::withLock($pharFile . '.lock', function () use ($pharFile, $phpunitVersion) {
                 if (Application::isCachedPhar($pharFile)) {
                     return;
                 }
 
-                if (in_array('--pud-offline', $arguments, true)) {
-                    throw new RuntimeException("PHPUnit $phpunitVersion is not available in the cache.");
-                }
                 $response = Http::get("https://phar.phpunit.de/phpunit-$phpunitVersion.phar");
                 if ($response['code'] !== 200 || !is_string($response['content']) || $response['content'] === '') {
                     throw new RuntimeException("Unable to download PHPUnit $phpunitVersion: $response[error]");
@@ -90,9 +87,6 @@ class Application
         $repositoryFile = $cacheDirectory . DIRECTORY_SEPARATOR . 'repository.json';
         $repository = Cache::readJson($repositoryFile);
         if ($force || !isset($repository['mapping'][$major])) {
-            if (in_array('--pud-offline', $arguments, true)) {
-                throw new Exception('No cached PHPUnit repository is available for offline mode.');
-            }
             $response = Http::get('https://phar.phpunit.de/all-releases.html', array(
                 CURLOPT_HTTPHEADER => array(
                     'If-None-Match: ' . (isset($repository['etag']) ? $repository['etag'] : ''),
@@ -276,7 +270,6 @@ class Application
         echo "  --pud-phpunit-version=X       Use an explicit PHPUnit release" . PHP_EOL;
         echo "  --pud-cache-dir=PATH          Use a custom cache directory" . PHP_EOL;
         echo "  --pud-force-update            Refresh the PHPUnit repository" . PHP_EOL;
-        echo "  --pud-offline                 Never access the network" . PHP_EOL;
         echo "  --pud-clear-cache             Clear the local cache" . PHP_EOL;
         echo "  --pud-verbose                 Show diagnostic output" . PHP_EOL;
     }
