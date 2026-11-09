@@ -225,7 +225,7 @@ class Application
         return '-d' . strtolower($name);
     }
 
-    private static function isCachedPhar($filename)
+    public static function isCachedPhar($filename)
     {
         if (!is_file($filename) || filesize($filename) < 4) {
             return false;
@@ -240,7 +240,7 @@ class Application
         return $header !== '404' && Application::isValidPhar($filename);
     }
 
-    private static function isValidPhar($filename)
+    public static function isValidPhar($filename)
     {
         try {
             $phar = new Phar($filename);
